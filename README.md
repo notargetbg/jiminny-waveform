@@ -34,17 +34,17 @@ See the section about [deployment](#deployment) for more information.
 
 #### Title: User should be able to interract with the waveform and add a messsage
 
-#### Description: When hovering the waveform the user should be able to see the indicator and add a messsage
+#### Description: When hovering on the waveform the user should be able to see the indicator and add a messsage
 
-Precondition: the user must click on a position inside the waveform in order to see the popup input, then write a messsage and press enter on the keyboard
-Assumption: the client has loaded the waveform data and the user has entered text inside the input field
+##### Precondition: the user must click on a position inside the waveform in order to see the popup input, then write a messsage and press enter on the keyboard
+##### Assumption: the client has loaded the waveform data and the user has entered text inside the input field
 
 #### Test Steps:
 
-Open the app
-Wait for waveform to load
-Hover on waveform
-Write a message and press enter
+##### Open the app
+##### Wait for waveform to load
+##### Hover on waveform and click on desired position
+##### Write a message and press enter
 
 #### Expected Result: message is rendered below the wavetable
 
@@ -54,13 +54,13 @@ Write a message and press enter
 
 #### Description: When clicking on the delete icon on the right side of the message, the message gets deleted
 
-Precondition: the user must click on a delete icon
-Assumption: the user has clicked on a delete icon on the right side of the message
+##### Precondition: the user must click on a delete icon
+##### Assumption: the user has clicked on a delete icon on the right side of the message
 
 #### Test Steps:
 
-Open the app and add a message
-Click on the delete icon on the right side of the message
+##### Open the app and add a message
+##### Click on the delete icon on the right side of the message
 
 #### Expected Result: The message the user clicked on, gets deleted
 
