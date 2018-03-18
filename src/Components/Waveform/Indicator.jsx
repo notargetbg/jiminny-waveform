@@ -1,5 +1,7 @@
 import React from 'react';
 import * as Convertor from '../../Helpers/Convertor';
+import { connect } from 'react-redux';
+import { addMessage } from '../../Store/actions/index';
 import moment from 'moment';
 import { FormControl, FormGroup, Glyphicon } from 'react-bootstrap';
 import './indicator.css';
@@ -12,7 +14,8 @@ class Indicator extends React.Component {
           indicatorPosition: null,
           time: null,
           shouldIndicatorShow: false,
-          shouldFormShow: false
+          shouldFormShow: false,
+          message: null
         };
     }
 
@@ -30,13 +33,10 @@ class Indicator extends React.Component {
         const indicatorPositionInPercents = Convertor.convertPixelsToPercents(x, this.props.totalLength);
         const indicatorPositionInSeconds = Convertor.convertPercentsToSeconds(indicatorPositionInPercents, 1863.166625);
         const time = moment.utc(indicatorPositionInSeconds * 1000).format("HH:mm:ss");
-        
-        console.log(this.state.shouldFormShow);
 
         if(!this.state.shouldFormShow) {
             this.setIndicatorPositionAndTime(x, time);
         }
-        // console.log(time)
     }
 
     showIndicator = () => {
@@ -65,6 +65,20 @@ class Indicator extends React.Component {
         });
     }
 
+    updateInput = (e) => {
+        this.setState({
+            message: e.target.value
+        });
+    }
+
+    addMessage = (e) => {
+        e.preventDefault();
+        this.props.dispatch(addMessage(this.state.message, this.state.time));
+
+        this.setState({
+            shouldFormShow: false
+        });
+    }
     
     render() {
         const { IndicatorData, background } = this.props;
@@ -74,6 +88,7 @@ class Indicator extends React.Component {
                 onMouseMove={this.handleIndicator}
                 onMouseEnter={this.showIndicator}
                 onMouseLeave={this.hideIndicator}>
+
                 {this.state.shouldIndicatorShow &&
                     <div data-time={this.state.time}
                         onClick={this.showForm}
@@ -83,9 +98,9 @@ class Indicator extends React.Component {
                 }
 
                 {this.state.shouldFormShow &&
-                    <form className="comment-form" style={{left: this.state.indicatorPosition - 100, display: "block"}}>
+                    <form className="comment-form" onSubmit={this.addMessage} style={{left: this.state.indicatorPosition - 100, display: "block"}}>
                         <FormGroup bsSize="small">
-                            <FormControl className="comment-input" type="text" placeholder="Enter a comment" />
+                            <FormControl className="comment-input" type="text" onChange={this.updateInput} placeholder="Enter a comment" />
                         </FormGroup>
                         <Glyphicon className="comment-cancel" glyph="remove-circle" onClick={this.hideForm} />
                     </form>
@@ -95,4 +110,10 @@ class Indicator extends React.Component {
     }
 }
 
-export default Indicator;
+const mapStateToProps = (state) => {
+    return {
+        messages: state.messages
+    }
+}
+
+export default connect(mapStateToProps)(Indicator);

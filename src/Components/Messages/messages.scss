@@ -8,8 +8,19 @@
         color: $gray;
         padding: 4px 10px;
         
-        .glyphicon {
-            font-size: 12px;
+        .delete-message {
+            cursor: pointer;
+            position: absolute;
+            top: 6px;
+            right: 6px;
+            font-size: 14px;
+            color: $brand;
+            opacity: .2;
+            transition: all .3s;
+        }
+
+        &:hover .delete-message {
+            opacity: 1;
         }
     }
 }
