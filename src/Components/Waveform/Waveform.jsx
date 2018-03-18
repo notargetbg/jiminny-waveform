@@ -11,7 +11,7 @@ class Waveform extends React.Component {
         if (!waveformData) {
             return null;
         }
-
+        
         const talkTimesLength = waveformData.length;
         const totalLength = waveformData[talkTimesLength - 1][1];
         

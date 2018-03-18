@@ -1,57 +1,44 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { removeMessage, editMessage } from '../../Store/actions/index';
-import { ListGroup, ListGroupItem, Glyphicon, FormControl } from 'react-bootstrap';
+import { removeMessage, updateSettingsUI } from '../../Store/actions/index';
+import { ListGroup, ListGroupItem, Glyphicon } from 'react-bootstrap';
 import './messages.css';
 
 class Messages extends React.Component {
-    constructor() {
-        super();
-        this.state = {
-          shouldShowField: false
-        };
-    }
-
-    editMessage = (id, text) => () => {
-        this.props.dispatch(editMessage(id, text));
-        this.state.shouldShowField;
-
-        this.setState({
-            shouldShowField: true
-        });
-        console.log('editing');
-    }
-
     deleteMessage = (id) => (e) => {
         this.props.dispatch(removeMessage(id));
-        this.setState({
-            shouldShowField: false
-        });
     }
 
+    toggleSort = () => {
+        this.props.dispatch(updateSettingsUI({isMessageOrderToggled: !this.props.isMessageOrderToggled}));
+    }
+
+    sortByTime = (a, b) => { 
+        return a.time > b.time;
+    };
+
+    sortByTimeDescending = (a, b) => { 
+        return a.time < b.time;
+    };
+
     render() {
-        const { messages } = this.props;
-        console.log(messages);
+        const { messages, isMessageOrderToggled } = this.props;
 
         return (
            <ListGroup className="messages">
                 {messages.length > 0 &&
-                    <h4>User messages</h4>
+                    <h4>
+                        Party messages 
+                        {messages.length > 1 &&
+                            <Glyphicon className="sort-by-date" glyph="sort" onClick={this.toggleSort} />
+                        }
+                    </h4>
                 }
-                {messages.map((message, index) => (
+                {messages.sort((isMessageOrderToggled ? this.sortByTimeDescending : this.sortByTime)).map((message, index) => (
                     <ListGroupItem key={message.id} className="message">
-                        <div 
-                           // onClick={this.editMessage(message.id, 'test edit')}
-                        >
-                            {!this.state.shouldShowField &&
-                                <span>
-                                    <Glyphicon glyph="time" /> {message.time} {message.text}
-                                </span>
-                            }
-                            {this.state.shouldShowField &&
-                                <FormControl className="comment-input" type="text" onChange={this.updateInput} placeholder="Enter a comment" />
-                            }
-                        </div>
+                        <span>
+                            <Glyphicon glyph="time" /> [{message.time.format("HH:mm:ss") }] {message.text}
+                        </span>
                         <Glyphicon className="delete-message" glyph="remove-circle" onClick={this.deleteMessage(index)} />
                     </ListGroupItem>
                 ))}
@@ -62,7 +49,8 @@ class Messages extends React.Component {
 
 const mapStateToProps = (state) => {
     return {
-        messages: state.messages
+        messages: state.messages,
+        isMessageOrderToggled: state.ui.isMessageOrderToggled
     }
 }
 

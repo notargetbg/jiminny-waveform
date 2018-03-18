@@ -1,7 +1,6 @@
 import React from 'react';
 
-class WaveformActivePart extends React.Component {    
-
+class WaveformActivePart extends React.Component {
     render() {
         const { start, end, background } = this.props;
         
