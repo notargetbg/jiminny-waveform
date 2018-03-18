@@ -22,3 +22,6 @@ yarn-error.log*
 
 # css not needed
 src/**/*.css
+
+# allow
+!src/index.css
