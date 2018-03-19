@@ -1,6 +1,6 @@
 const convertSecondsToPercents = (seconds, totalLength) => {
     // seconds / length * 100
-    return seconds / totalLength * 100;
+    return ( seconds / totalLength ) * 100;
 }
 
 const convertPixelsToPercents = (pixels, totalLength) => {
@@ -10,7 +10,7 @@ const convertPixelsToPercents = (pixels, totalLength) => {
 
 const convertPercentsToSeconds = (percents, totalLength) => {
     // percents * totalLength / 100
-    return percents * totalLength / 100;
+    return ( percents * totalLength ) / 100;
 }
 
 export { convertSecondsToPercents, convertPixelsToPercents, convertPercentsToSeconds };

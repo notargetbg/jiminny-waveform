@@ -1,4 +1,4 @@
-const waveform = (state = [], action) => {
+const waveform = (state = {}, action) => {
   switch (action.type) {
     case 'GET_WAVEFORM_DATA':
         return {...state, ...action.payload};
