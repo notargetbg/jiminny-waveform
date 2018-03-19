@@ -23,11 +23,6 @@ export const removeMessage = (id) => ({
   payload: id,
 });
 
-export const updateWaveformsWidth = (width) => ({
-  type: 'UPDATE_WAVEFORMS_WIDTH',
-  payload: width,
-});
-
 export const updateSettingsUI = (options) => ({
   type: 'UPDATE_SETTINGS_UI',
   payload: options,

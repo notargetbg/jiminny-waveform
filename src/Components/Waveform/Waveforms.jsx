@@ -3,20 +3,31 @@ import { connect } from 'react-redux';
 import Waveform from '../Waveform/Waveform';
 import Indicator from '../Waveform/Indicator';
 import Loader from '../Loader/Loader';
-import { updateWaveformsWidth , getWaveformData, updateWaveformTotalDuration } from '../../Store/actions';
+import { getWaveformData, updateWaveformTotalDuration } from '../../Store/actions';
 import './indicator.css';
 
 class Waveforms extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            waveformsWidth: null
+        };
+    }
+
+    setWaveformsWidth = (width) => {
+        this.setState({
+            waveformsWidth: width
+        });
+    }
+
     componentDidMount() {       
         this.props.dispatch(getWaveformData());
+        this.setWaveformsWidth(this.waveformsEl.clientWidth);
     }
 
     componentDidUpdate() {
-        const {waveformsWidth, waveformDataTotalDuration, waveformData} = this.props;
+        const {waveformDataTotalDuration, waveformData} = this.props;
 
-        if (!waveformsWidth) {
-            this.props.dispatch(updateWaveformsWidth(this.waveformsEl.clientWidth));
-        }
         if (!waveformDataTotalDuration && waveformData.talkTimes) {
 
             const talkTimesSpeechEndings = Object.entries(waveformData.talkTimes).map(talkTime => {
@@ -29,7 +40,9 @@ class Waveforms extends React.Component {
     }
 
     render() {
-        const { waveformsWidth, waveformData } = this.props;
+        const { waveformData } = this.props;
+
+        console.log(this.state);
 
         return (            
             <div className="waveforms" ref={(el) => { this.waveformsEl = el; }}>
@@ -38,7 +51,7 @@ class Waveforms extends React.Component {
                 }
                 {waveformData.talkTimes &&
                 <div>
-                    <Indicator totalLength={waveformsWidth} />			
+                    <Indicator totalLength={this.state.waveformsWidth} />			
                     <Waveform waveformData={waveformData.talkTimes.user} background={"#f23e57"}/>
                     <Waveform waveformData={waveformData.talkTimes.customer} background={"#02B875"} />
                 </div>
@@ -50,7 +63,6 @@ class Waveforms extends React.Component {
 
 const mapStateToProps = (state) => {
     return {
-        waveformsWidth: state.ui.waveformsWidth,
         waveformData: state.waveform,
         waveformDataTotalDuration: state.waveform.waveformDataTotalDuration
     }
