@@ -42,8 +42,6 @@ class Waveforms extends React.Component {
     render() {
         const { waveformData } = this.props;
 
-        console.log(this.state);
-
         return (            
             <div className="waveforms" ref={(el) => { this.waveformsEl = el; }}>
                 { !waveformData.talkTimes &&
