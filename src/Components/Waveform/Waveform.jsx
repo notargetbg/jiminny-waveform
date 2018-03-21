@@ -6,14 +6,11 @@ import './waveform.css';
 class Waveform extends React.Component {      
 
     render() {
-        const { waveformData, background } = this.props;
+        const { waveformData, background, totalLength } = this.props;
 
         if (!waveformData) {
             return null;
         }
-        
-        const talkTimesLength = waveformData.length;
-        const totalLength = waveformData[talkTimesLength - 1][1];
         
         return (
             <div className="waveform-holder">

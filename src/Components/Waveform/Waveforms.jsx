@@ -33,13 +33,13 @@ class Waveforms extends React.Component {
                 return talkTime[1].slice(-1);
             }).map(x => x[0][1]);
 
-            const duration = Math.max(...talkTimesSpeechEndings)
+            const duration = Math.max(...talkTimesSpeechEndings);
             this.props.dispatch(updateWaveformTotalDuration(duration));
         }
     }
 
     render() {
-        const { waveformData } = this.props;
+        const { waveformData, waveformDataTotalDuration } = this.props;
 
         return (            
             <div className="waveforms" ref={(el) => { this.waveformsEl = el; }}>
@@ -49,8 +49,8 @@ class Waveforms extends React.Component {
                 {waveformData.talkTimes &&
                 <div>
                     <Indicator totalLength={this.state.waveformsWidth} />			
-                    <Waveform waveformData={waveformData.talkTimes.user} background={"#f23e57"}/>
-                    <Waveform waveformData={waveformData.talkTimes.customer} background={"#02B875"} />
+                    <Waveform totalLength={waveformDataTotalDuration} waveformData={waveformData.talkTimes.user} background={"#f23e57"}/>
+                    <Waveform totalLength={waveformDataTotalDuration} waveformData={waveformData.talkTimes.customer} background={"#02B875"} />
                 </div>
                 }
             </div>

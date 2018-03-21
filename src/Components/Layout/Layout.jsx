@@ -12,7 +12,7 @@ class Layout extends Component {
 		<Grid>
 			<Jumbotron>
 				<img className="logo" src={logo} alt="Jiminy logo"/>
-				<h2>Waveform Visualizer  <small>a react/redux implemention</small></h2>
+				<h2>Waveform Visualizer  <small>a react/redux implementation</small></h2>
 			</Jumbotron>
 			
 			<Waveforms />
