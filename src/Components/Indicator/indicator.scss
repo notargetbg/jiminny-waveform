@@ -5,27 +5,7 @@
     height: 120%;
     top: -10%;
     z-index: 10;
-    position: absolute;
-
-    .comment-form {
-        position: absolute;
-        top: -45px;
-    }
-
-    .comment-input {        
-        width: 200px;
-        text-align: center;        
-        border-radius: 6px !important;
-    }
-
-    .comment-cancel {
-        cursor: pointer;
-        position: absolute;
-        top: -15px;
-        right: 0;
-        font-size: 12px;
-        color: $brand;
-    }
+    position: absolute;    
 }
 
 .hover-indicator {

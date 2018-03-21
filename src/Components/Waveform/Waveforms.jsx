@@ -1,10 +1,9 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import Waveform from '../Waveform/Waveform';
-import Indicator from '../Waveform/Indicator';
+import Indicator from '../Indicator/Indicator';
 import Loader from '../Loader/Loader';
 import { getWaveformData, updateWaveformTotalDuration } from '../../Store/actions';
-import './indicator.css';
 
 class Waveforms extends React.Component {
     constructor(props) {

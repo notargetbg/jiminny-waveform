@@ -1,9 +1,10 @@
 import React from 'react';
 import * as Convertor from '../../Helpers/Convertor';
 import { connect } from 'react-redux';
-import { addMessage, updateSettingsUI } from '../../Store/actions/index';
+import { updateSettingsUI } from '../../Store/actions/index';
 import moment from 'moment';
-import { FormControl, FormGroup, Glyphicon } from 'react-bootstrap';
+import CommentForm from '../Indicator/CommentForm';
+import Marker from './Marker';
 import './indicator.css';
 
 class Indicator extends React.Component {
@@ -46,26 +47,6 @@ class Indicator extends React.Component {
         }
     }
 
-    showForm = () => {
-        this.props.dispatch(updateSettingsUI({shouldFormShow: true}));
-    }
-
-    hideForm = () => {
-        this.props.dispatch(updateSettingsUI({shouldFormShow: false}));
-    }
-
-    updateInput = (e) => {
-        this.setState({
-            message: e.target.value
-        });
-    }
-
-    addMessage = (e) => {
-        e.preventDefault();
-        this.props.dispatch(addMessage(this.state.message, this.state.time));
-        this.props.dispatch(updateSettingsUI({shouldFormShow: false}));
-    }
-    
     render() {
         return (           
             <div className="waveform-indicator-holder"
@@ -74,22 +55,10 @@ class Indicator extends React.Component {
                 onMouseLeave={this.hideIndicator}>
 
                 {this.props.shouldIndicatorShow && this.state.time &&
-                    <div className="hover-indicator"
-                        style={{left: this.state.indicatorPosition, display: "block"}}
-                        onClick={this.showForm}
-                        data-time={this.state.time.format("HH:mm:ss")}>
-                    </div>
+                    <Marker time={this.state.time} indicatorPosition={this.state.indicatorPosition} />
                 }
-
                 {this.props.shouldFormShow &&
-                    <form className="comment-form"
-                        style={{left: this.state.indicatorPosition - 100, display: "block"}}
-                        onSubmit={this.addMessage}>
-                        <FormGroup bsSize="small">
-                            <FormControl className="comment-input" type="text" onChange={this.updateInput} placeholder="Enter a comment" />
-                        </FormGroup>
-                        <Glyphicon className="comment-cancel" glyph="remove-circle" onClick={this.hideForm} />
-                    </form>
+                    <CommentForm positionLeft={this.state.indicatorPosition} time={this.state.time} />
                 }
             </div>
         )
