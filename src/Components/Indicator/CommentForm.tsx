@@ -1,5 +1,5 @@
 import React from 'react';
-import { updateSettingsUI, addMessage } from '../../Store/actions';
+import { updateSettingsUI, addMessage } from '../../Store/actions/main';
 import { connect } from 'react-redux';
 import { FormControl, FormGroup, Glyphicon } from 'react-bootstrap';
 

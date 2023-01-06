@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { removeMessage, updateSettingsUI } from '../../Store/actions/index';
+import { removeMessage, updateSettingsUI } from '../../Store/actions/main';
 import { ListGroup, ListGroupItem, Glyphicon } from 'react-bootstrap';
 
 class Messages extends React.Component {

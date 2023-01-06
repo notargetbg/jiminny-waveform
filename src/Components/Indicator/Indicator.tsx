@@ -1,9 +1,9 @@
 import React from 'react';
-import * as Convertor from '../../Helpers/Convertor';
-import { connect } from 'react-redux';
-import { updateSettingsUI } from '../../Store/actions/index';
 import moment from 'moment';
-import CommentForm from '../Indicator/CommentForm';
+import { connect } from 'react-redux';
+import * as Convertor from '../../Helpers/Convertor';
+import { updateSettingsUI } from '../../Store/actions/main';
+import CommentForm from './CommentForm';
 import Marker from './Marker';
 
 class Indicator extends React.Component {

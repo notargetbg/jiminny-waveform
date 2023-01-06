@@ -1,6 +1,6 @@
 import React from 'react';
-import { updateSettingsUI } from '../../Store/actions/index';
 import { connect } from 'react-redux';
+import { updateSettingsUI } from '../../Store/actions/main';
 
 class Marker extends React.Component {
     showForm = () => {
