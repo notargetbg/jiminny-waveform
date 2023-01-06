@@ -1,7 +1,6 @@
 import React from 'react';
 import WaveformActivePart from './WaveformActivePart';
 import * as Convertor from '../../Helpers/Convertor';
-import './waveform.css';
 
 class Waveform extends React.Component {      
 

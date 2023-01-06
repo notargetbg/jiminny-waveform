@@ -2,7 +2,6 @@ import React from 'react';
 import { updateSettingsUI, addMessage } from '../../Store/actions';
 import { connect } from 'react-redux';
 import { FormControl, FormGroup, Glyphicon } from 'react-bootstrap';
-import './comment-form.css';
 
 class CommentForm extends React.Component {
     updateInput = (e) => {

@@ -2,7 +2,6 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { removeMessage, updateSettingsUI } from '../../Store/actions/index';
 import { ListGroup, ListGroupItem, Glyphicon } from 'react-bootstrap';
-import './messages.css';
 
 class Messages extends React.Component {
     deleteMessage = (id) => (e) => {

@@ -1,5 +1,4 @@
 import React from 'react';
-import './loader.css';
 
 class Loader extends React.Component {
     render() {

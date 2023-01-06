@@ -3,7 +3,6 @@ import logo from '../../Assets/logo-jiminny.png';
 import Messages from '../Messages/Messages';
 import Waveforms from '../Waveform/Waveforms';
 import { Grid, Jumbotron } from 'react-bootstrap';
-import './layout.css';
 
 class Layout extends Component {
 	render() {	

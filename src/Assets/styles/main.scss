@@ -1,3 +1,7 @@
-// Colors
-$brand: #f23e57;
-$gray: #5f5f5f;
+
+@import url('./comment-form.scss');
+@import url('./indicator.scss');
+@import url('./layout.scss');
+@import url('./loader.scss');
+@import url('./messages.scss');
+@import url('./waveform.scss');

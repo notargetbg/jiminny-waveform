@@ -1,4 +1,4 @@
-const WAVEFORM_API_EDPOINT = 'https://rawgit.com/jiminny/join-the-team/master/assets/wavedata.json';
+const WAVEFORM = '../dummy.json';
 
 let messageId = 0
 export const addMessage = (text, time) => ({
@@ -29,10 +29,20 @@ export const updateSettingsUI = (options) => ({
 });
 
 export const getWaveformData = () => {
+
   return (dispatch) => {
-    return fetch(WAVEFORM_API_EDPOINT)
+    return fetch(WAVEFORM, {
+      headers : { 
+        'Content-Type': 'application/json',
+        'Accept': 'application/json'
+       }
+    })
     .then(response => response.json())
-    .then(json => dispatch(getWaveformDataResolved(json)))
+    .then(json => {
+      console.log(json);
+
+      dispatch(getWaveformDataResolved(json))
+    })
   }
 }
 

@@ -5,7 +5,6 @@ import { updateSettingsUI } from '../../Store/actions/index';
 import moment from 'moment';
 import CommentForm from '../Indicator/CommentForm';
 import Marker from './Marker';
-import './indicator.css';
 
 class Indicator extends React.Component {
     constructor() {
