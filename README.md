@@ -1,5 +1,6 @@
 
 ## Waveform Visualizer Task
+![screenshot-localhost_3000-2023 01 06-20_32_47](https://user-images.githubusercontent.com/10579650/211076938-ea215af7-fa19-45b4-92a6-d1e54e9ed7f9.png)
 
 Thank you for giving me the opportunity to work on this amazing and very interesting task!
 It was challenging and fun!
