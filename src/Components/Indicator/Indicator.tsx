@@ -1,29 +1,47 @@
 import React from 'react';
-import moment from 'moment';
+import moment, { Moment } from 'moment';
+import { Dispatch } from 'redux';
 import { connect } from 'react-redux';
+
 import * as Convertor from '../../Helpers/Convertor';
 import { updateSettingsUI } from '../../Store/actions/main';
 import CommentForm from './CommentForm';
 import Marker from './Marker';
+import { IndicatorPosition } from '../../Types/Types';
+import { AppState } from '../../Store/reducers/main';
 
-class Indicator extends React.Component {
-    constructor() {
-        super();
+interface Props {
+    waveformDataTotalDuration: number;
+    totalLength: number;
+    shouldFormShow: boolean;
+    shouldIndicatorShow: boolean;
+    dispatch: Dispatch;
+}
+
+interface State {
+    indicatorPosition: IndicatorPosition;
+    time: Moment | null;
+    message: string | null;
+}
+
+class Indicator extends React.Component<Props, State> {
+    constructor(props: Props) {
+        super(props);
         this.state = {
-          indicatorPosition: null,
-          time: null,
-          messsage: null
+            indicatorPosition: null,
+            time: null,
+            message: null
         };
     }
 
-    setIndicatorPositionAndTime = (position, time) => {
+    setIndicatorPositionAndTime = (position: number, time: Moment) => {
         this.setState({
             indicatorPosition: position,
             time
         });
     }
 
-    handleIndicator = (e) => {
+    handleIndicator = (e: React.MouseEvent) => {
         const { waveformDataTotalDuration, totalLength, shouldFormShow } = this.props;
 		const rect = e.currentTarget.getBoundingClientRect();
         const x = e.clientX - rect.left;
@@ -31,7 +49,7 @@ class Indicator extends React.Component {
         const indicatorPositionInSeconds = Convertor.convertPercentsToSeconds(indicatorPositionInPercents, waveformDataTotalDuration);
         const time = moment.utc(indicatorPositionInSeconds * 1000);
 
-        if(!shouldFormShow) {
+        if (!shouldFormShow) {
             this.setIndicatorPositionAndTime(x, time);
         }
     }
@@ -57,14 +75,14 @@ class Indicator extends React.Component {
                     <Marker time={this.state.time} indicatorPosition={this.state.indicatorPosition} />
                 }
                 {this.props.shouldFormShow &&
-                    <CommentForm positionLeft={this.state.indicatorPosition} time={this.state.time} />
+                    <CommentForm indicatorPosition={this.state.indicatorPosition} time={this.state.time} />
                 }
             </div>
         )
     }
 }
 
-const mapStateToProps = (state) => {
+const mapStateToProps = (state: AppState) => {
     return {
         shouldIndicatorShow: state.ui.shouldIndicatorShow,
         shouldFormShow: state.ui.shouldFormShow,

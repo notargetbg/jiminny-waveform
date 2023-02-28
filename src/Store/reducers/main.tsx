@@ -8,3 +8,14 @@ export default combineReducers({
   waveform,
   ui
 });
+
+export type AppState = {
+  messages: Array<string>,
+  waveform: {
+    waveformDataTotalDuration: number
+  }, 
+  ui: {
+    shouldFormShow: boolean,
+    shouldIndicatorShow: boolean
+  }
+};

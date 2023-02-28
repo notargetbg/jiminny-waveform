@@ -1,4 +1,11 @@
-const waveform = (state = {}, action) => {
+import { Waveform } from "../../Types/Types";
+
+type Action = {
+  type: string,
+  payload: Waveform
+}
+
+const waveform = (state = {}, action: Action) => {
   switch (action.type) {
     case 'GET_WAVEFORM_DATA':
         return {...state, ...action.payload};

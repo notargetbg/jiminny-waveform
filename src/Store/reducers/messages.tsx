@@ -1,4 +1,11 @@
-const messages = (state = [], action) => {
+import { Message } from "../../Types/Types";
+
+type Action = {
+    type: string,
+    payload: Message
+  }
+
+const messages = (state = [], action: Action) => {
   switch (action.type) {
     case 'ADD_MESSAGE':
         return [ ...state, {
@@ -8,11 +15,11 @@ const messages = (state = [], action) => {
             }
         ];
     case 'EDIT_MESSAGE':
-        return state.map((message, i) => { 
+        return state.map((message: Message, i) => { 
             return message.id === action.payload.id ? {...message, text: action.payload.text} : message;
         });
     case 'REMOVE_MESSAGE':
-        return [...state.slice(0, action.payload), ...state.slice(action.payload + 1)];
+        return [...state.slice(0, action.payload.id), ...state.slice(action.payload.id + 1)];
     default:
       return state;
   }

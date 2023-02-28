@@ -1,10 +1,17 @@
+import { UI } from "../../Types/Types";
+
+type Action = {
+  type: string,
+  payload: UI
+}
+
 const initialState = {
     shouldIndicatorShow: false,
     shouldFormShow: false,
     order: 'ASC'
   };
 
-const ui = (state = initialState, action) => {
+const ui = (state = initialState, action: Action) => {
     switch (action.type) {
         case 'UPDATE_SETTINGS_UI':
         return {...state,  ...{...action.payload }};

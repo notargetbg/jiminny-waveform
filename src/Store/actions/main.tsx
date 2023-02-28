@@ -1,7 +1,10 @@
+import { Dispatch } from "redux";
+import { UI, Waveform } from "../../Types/Types";
+
 const WAVEFORM = '../dummy.json';
 
 let messageId = 0
-export const addMessage = (text, time) => ({
+export const addMessage = (text: string, time: string) => ({
   type: 'ADD_MESSAGE',
   payload: {
     id: messageId++,
@@ -10,7 +13,7 @@ export const addMessage = (text, time) => ({
   }
 });
 
-export const editMessage = (id, text) => ({
+export const editMessage = (id: number, text: string) => ({
   type: 'EDIT_MESSAGE',
   payload: {
     id,
@@ -18,7 +21,7 @@ export const editMessage = (id, text) => ({
   }
 });
 
-export const removeMessage = (id) => ({
+export const removeMessage = (id: number) => ({
   type: 'REMOVE_MESSAGE',
   payload: id,
 });
@@ -30,7 +33,7 @@ export const updateSettingsUI = (options) => ({
 
 export const getWaveformData = () => {
 
-  return (dispatch) => {
+  return (dispatch: Dispatch) => {
     return fetch(WAVEFORM, {
       headers : { 
         'Content-Type': 'application/json',
@@ -53,7 +56,7 @@ export const getWaveformDataResolved = (payload) => {
   }
 }
 
-export const updateWaveformTotalDuration = (duration) => {
+export const updateWaveformTotalDuration = (duration: number) => {
   return {
     type: 'UPDATE_WAVEFORM_TOTAL_DURATION',
     payload: duration
