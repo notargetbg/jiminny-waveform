@@ -3,12 +3,11 @@ import { updateSettingsUI, addMessage } from '../../Store/actions/main';
 import { connect } from 'react-redux';
 import { FormControl, FormGroup, Glyphicon } from 'react-bootstrap';
 import { Dispatch } from 'redux';
-import { IndicatorPosition } from '../../Types/Types';
-import { Moment } from 'moment';
+import { IndicatorPosition, Time } from '../../Types/Types';
 
 interface Props {
     dispatch: Dispatch;
-    time: null | Moment;
+    time: Time;
     indicatorPosition: IndicatorPosition;
 }
 

@@ -7,7 +7,7 @@ import * as Convertor from '../../Helpers/Convertor';
 import { updateSettingsUI } from '../../Store/actions/main';
 import CommentForm from './CommentForm';
 import Marker from './Marker';
-import { IndicatorPosition } from '../../Types/Types';
+import { IndicatorPosition, Time } from '../../Types/Types';
 import { AppState } from '../../Store/reducers/main';
 
 interface Props {
@@ -20,7 +20,7 @@ interface Props {
 
 interface State {
     indicatorPosition: IndicatorPosition;
-    time: Moment | null;
+    time: Time | null;
     message: string | null;
 }
 
@@ -72,10 +72,10 @@ class Indicator extends React.Component<Props, State> {
                 onMouseLeave={this.hideIndicator}>
 
                 {this.props.shouldIndicatorShow && this.state.time &&
-                    <Marker time={this.state.time} indicatorPosition={this.state.indicatorPosition} />
+                    <Marker time={this.state.time as Moment} indicatorPosition={this.state.indicatorPosition} />
                 }
                 {this.props.shouldFormShow &&
-                    <CommentForm indicatorPosition={this.state.indicatorPosition} time={this.state.time} />
+                    <CommentForm indicatorPosition={this.state.indicatorPosition} time={this.state.time as Moment} />
                 }
             </div>
         )

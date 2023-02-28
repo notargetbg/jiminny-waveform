@@ -15,7 +15,7 @@ const messages = (state = [], action: Action) => {
             }
         ];
     case 'EDIT_MESSAGE':
-        return state.map((message: Message, i) => { 
+        return state.map((message: Message) => { 
             return message.id === action.payload.id ? {...message, text: action.payload.text} : message;
         });
     case 'REMOVE_MESSAGE':
