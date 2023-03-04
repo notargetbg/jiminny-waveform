@@ -13,10 +13,11 @@ export type Messages = Array<Message>;
 export type UI = {
     shouldFormShow?: boolean;
     shouldIndicatorShow?: boolean;
+    isMessageOrderToggled?: boolean;
 }
 
 export type Waveform = {
     waveformDataTotalDuration: number
 }
 
-export type Time = Moment | string;
+export type Time = Moment;

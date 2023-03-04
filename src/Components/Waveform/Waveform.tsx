@@ -2,7 +2,13 @@ import React from 'react';
 import WaveformActivePart from './WaveformActivePart';
 import * as Convertor from '../../Helpers/Convertor';
 
-class Waveform extends React.Component {      
+type Props = {
+    waveformData: Array<Array<number>>,
+    background: string,
+    totalLength: number
+};
+
+class Waveform extends React.Component<Props> {      
 
     render() {
         const { waveformData, background, totalLength } = this.props;

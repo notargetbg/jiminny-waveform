@@ -4,16 +4,34 @@ import Waveform from './Waveform';
 import Indicator from '../Indicator/Indicator';
 import Loader from '../Loader/Loader';
 import { getWaveformData, updateWaveformTotalDuration } from '../../Store/actions/main';
+import { Action, ActionCreator } from 'redux';
+import { AppState } from '../../Store/reducers/main';
 
-class Waveforms extends React.Component {
-    constructor(props) {
+type Props = {
+    dispatch: ActionCreator<Action>,
+    waveformDataTotalDuration: number,
+    waveformData: {
+        talkTimes: {
+            user: Array<Array<number>>,
+            customer: Array<Array<number>>
+        }
+    }
+};
+
+type State = {
+    waveformsWidth: number,
+
+};
+
+class Waveforms extends React.Component<Props, State> {
+    constructor(props: Props) {
         super(props);
         this.state = {
-            waveformsWidth: null
+            waveformsWidth: 0
         };
     }
 
-    setWaveformsWidth = (width) => {
+    setWaveformsWidth = (width: number) => {
         this.setState({
             waveformsWidth: width
         });
@@ -58,7 +76,7 @@ class Waveforms extends React.Component {
     }
 }
 
-const mapStateToProps = (state) => {
+const mapStateToProps = (state : AppState) => {
     return {
         waveformData: state.waveform,
         waveformDataTotalDuration: state.waveform.waveformDataTotalDuration

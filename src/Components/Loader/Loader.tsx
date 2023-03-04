@@ -1,6 +1,10 @@
 import React from 'react';
 
-class Loader extends React.Component {
+type Props = {
+    color: string
+}
+
+class Loader extends React.Component<Props> {
     render() {
         return (
             <div style={{color: this.props.color}} className="loader" />

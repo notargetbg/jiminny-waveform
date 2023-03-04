@@ -2,9 +2,18 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { removeMessage, updateSettingsUI } from '../../Store/actions/main';
 import { ListGroup, ListGroupItem, Glyphicon } from 'react-bootstrap';
+import { Message, Messages as MessagesType } from '../../Types/Types';
+import { Dispatch } from 'redux';
+import { AppState } from '../../Store/reducers/main';
 
-class Messages extends React.Component {
-    deleteMessage = (id) => (e) => {
+type Props = {
+    messages: MessagesType,
+    dispatch: Dispatch,
+    isMessageOrderToggled: boolean
+};
+
+class Messages extends React.Component<Props> {
+    deleteMessage = (id: number) => () => {
         this.props.dispatch(removeMessage(id));
     }
 
@@ -12,12 +21,12 @@ class Messages extends React.Component {
         this.props.dispatch(updateSettingsUI({isMessageOrderToggled: !this.props.isMessageOrderToggled}));
     }
 
-    sortByTime = (a, b) => { 
-        return a.time > b.time;
+    sortByTime = (a: Message, b: Message): number => { 
+        return a.time > b.time ? 1 : -1;
     };
 
-    sortByTimeDescending = (a, b) => { 
-        return a.time < b.time;
+    sortByTimeDescending = (a: Message, b: Message): number => { 
+        return a.time < b.time ? 1 : -1;
     };
 
     render() {
@@ -33,7 +42,7 @@ class Messages extends React.Component {
                         }
                     </h4>
                 }
-                {messages.sort((isMessageOrderToggled ? this.sortByTimeDescending : this.sortByTime)).map((message, index) => (
+                {messages.sort((isMessageOrderToggled ? this.sortByTimeDescending : this.sortByTime)).map((message: Message, index) => (
                     <ListGroupItem key={message.id} className="message">
                         <span>
                             <Glyphicon glyph="time" /> [{message.time.format("HH:mm:ss") }] {message.text}
@@ -46,7 +55,7 @@ class Messages extends React.Component {
     }
 }
 
-const mapStateToProps = (state) => {
+const mapStateToProps = (state: AppState) => {
     return {
         messages: state.messages,
         isMessageOrderToggled: state.ui.isMessageOrderToggled

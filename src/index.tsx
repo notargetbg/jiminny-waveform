@@ -11,7 +11,13 @@ import 'bootstrap/dist/css/bootstrap.css';
 import './Assets/styles/main.scss';
 import './index.css';
 
-const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+declare global {
+  interface Window {
+    __REDUX_DEVTOOLS_EXTENSION_COMPOSE__?: typeof compose;
+  }
+}
+
+const composeEnhancers =  window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 const store = createStore(
     mainReducer, 
     composeEnhancers(
@@ -19,11 +25,13 @@ const store = createStore(
     )
 );
 
-const root = ReactDOM.createRoot(document.getElementById('root'));
+const el = document.getElementById('root') || document.createElement('div');
+
+const root = ReactDOM.createRoot(el);
 root.render(
   <React.StrictMode>
       <Provider store={store}>
-      <Layout />
-    </Provider>
+        <Layout />
+      </Provider>
   </React.StrictMode>
 );

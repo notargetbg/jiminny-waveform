@@ -33,7 +33,7 @@ export const updateSettingsUI = (options: UI) => ({
 
 export const getWaveformData = () => {
 
-  return (dispatch: Dispatch) => {
+  return (dispatch: Dispatch)  => {
     return fetch(WAVEFORM, {
       headers : { 
         'Content-Type': 'application/json',

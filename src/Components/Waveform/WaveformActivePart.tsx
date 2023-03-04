@@ -1,6 +1,13 @@
 import React from 'react';
 
-const WaveformActivePart = ({ start, end, background }) => {  
+type Props = {
+    start: number,
+    end: number,
+    background: string
+}
+
+const WaveformActivePart = (props: Props) => {
+    const { start, end, background } = props
     return (
         <span 
             className="talk-time"                

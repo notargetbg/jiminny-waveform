@@ -8,6 +8,7 @@ type Action = {
 const initialState = {
     shouldIndicatorShow: false,
     shouldFormShow: false,
+    isMessageOrderToggled: false,
     order: 'ASC'
   };
 
