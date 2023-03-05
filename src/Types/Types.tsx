@@ -16,8 +16,16 @@ export type UI = {
     isMessageOrderToggled?: boolean;
 }
 
-export type Waveform = {
+export type WaveformType = {
     waveformDataTotalDuration: number
+    talkTimes: TalkTimes
 }
+
+export type TalkTimes = {
+    user: WaveformDataList,
+    customer: WaveformDataList
+};
+
+export type WaveformDataList = Array<Array<number>>;
 
 export type Time = Moment;

@@ -2,7 +2,7 @@ import { combineReducers } from 'redux';
 import messages from './messages';
 import waveform from './waveform';
 import ui from './ui';
-import { Message } from '../../Types/Types';
+import { Message, WaveformType } from '../../Types/Types';
 
 export default combineReducers({
   messages,
@@ -12,9 +12,7 @@ export default combineReducers({
 
 export type AppState = {
   messages: Array<Message>,
-  waveform: {
-    waveformDataTotalDuration: number
-  }, 
+  waveform: WaveformType, 
   ui: {
     shouldFormShow: boolean,
     shouldIndicatorShow: boolean,

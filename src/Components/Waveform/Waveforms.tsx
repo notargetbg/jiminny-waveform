@@ -6,24 +6,23 @@ import Loader from '../Loader/Loader';
 import { getWaveformData, updateWaveformTotalDuration } from '../../Store/actions/main';
 import { Action, ActionCreator } from 'redux';
 import { AppState } from '../../Store/reducers/main';
+import { TalkTimes } from '../../Types/Types';
 
 type Props = {
     dispatch: ActionCreator<Action>,
     waveformDataTotalDuration: number,
     waveformData: {
-        talkTimes: {
-            user: Array<Array<number>>,
-            customer: Array<Array<number>>
-        }
+        talkTimes: TalkTimes
     }
 };
 
 type State = {
     waveformsWidth: number,
-
 };
 
 class Waveforms extends React.Component<Props, State> {
+    waveformsEl?: HTMLDivElement | null;
+
     constructor(props: Props) {
         super(props);
         this.state = {
@@ -39,7 +38,9 @@ class Waveforms extends React.Component<Props, State> {
 
     componentDidMount() {       
         this.props.dispatch(getWaveformData());
-        this.setWaveformsWidth(this.waveformsEl.clientWidth);
+        if (this.waveformsEl) {
+            this.setWaveformsWidth(this.waveformsEl.clientWidth);
+        }
     }
 
     componentDidUpdate() {
@@ -59,6 +60,8 @@ class Waveforms extends React.Component<Props, State> {
     render() {
         const { waveformData, waveformDataTotalDuration } = this.props;
 
+        console.log(waveformData);
+
         return (            
             <div className="waveforms" ref={(el) => { this.waveformsEl = el; }}>
                 { !waveformData.talkTimes &&
@@ -76,7 +79,7 @@ class Waveforms extends React.Component<Props, State> {
     }
 }
 
-const mapStateToProps = (state : AppState) => {
+const mapStateToProps = (state: AppState) => {
     return {
         waveformData: state.waveform,
         waveformDataTotalDuration: state.waveform.waveformDataTotalDuration

@@ -1,5 +1,5 @@
 import { Dispatch } from "redux";
-import { Time, UI, Waveform } from "../../Types/Types";
+import { TalkTimes, Time, UI } from "../../Types/Types";
 
 const WAVEFORM = '../dummy.json';
 
@@ -42,14 +42,12 @@ export const getWaveformData = () => {
     })
     .then(response => response.json())
     .then(json => {
-      console.log(json);
-
       dispatch(getWaveformDataResolved(json))
     })
   }
 }
 
-export const getWaveformDataResolved = (payload: Waveform) => {
+export const getWaveformDataResolved = (payload: TalkTimes) => {
   return {
     type: 'GET_WAVEFORM_DATA',
     payload
